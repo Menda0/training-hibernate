@@ -1,0 +1,24 @@
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+		<!-- Optional debug properties -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+		<!-- Connector driver and dialect use by hibernate -->
+		<!-- This may change accordingly to the database tech used  -->
+		<!-- Example: mysql dialect should be org.hibernate.dialect.MySQLDialect  -->
+		<!-- Example: mysql dricer should be com.mysql.jdbc.Driver  -->
+        <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+		<!-- Path to your sqlite database -->
+        <property name="connection.url">jdbc:sqlite:mydb.db</property>
+        <property name="connection.username"></property>
+        <property name="connection.password"></property>
+        
+        <property name="hibernate.hbm2ddl.auto">create</property>
+
+        <mapping resource="Title.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

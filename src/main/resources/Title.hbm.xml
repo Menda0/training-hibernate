@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.training.hibernate.domain.Title" table="TITLE">
+
+		<!-- Entity description -->
+		<meta attribute="class-description">
+		 This class contains netflix titles like movies and series. 
+		</meta>
+	
+		<!-- Id integer auto generated -->
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+	
+		<!-- For every property a column should be generated on the table -->
+		<!-- Every property have a tipe. -->
+		<!-- Hibernate will make a connection between Java datatypes and Database column types -->
+		<property name="type" column="type" type="string" />
+		<property name="title" column="title" type="string" />
+		<property name="country" column="country" type="string" />
+		<property name="dateAdded" column="date_added" type="date" />
+		<property name="releaseYear" column="release_year" type="int" />
+		<property name="rating" column="rating" type="string" />
+		<property name="duration" column="duration" type="string" />
+
+	</class>
+</hibernate-mapping>
