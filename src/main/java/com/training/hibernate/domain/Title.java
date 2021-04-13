@@ -15,6 +15,18 @@ public class Title {
 	
 	public Title() {}
 
+	public Title(String title, String type, String country, Date dateAdded, Integer releaseYear,
+			String rating, String duration) {
+		super();
+		this.title = title;
+		this.type = type;
+		this.country = country;
+		this.dateAdded = dateAdded;
+		this.releaseYear = releaseYear;
+		this.rating = rating;
+		this.duration = duration;
+	}
+
 	public Integer getId() {
 		return id;
 	}

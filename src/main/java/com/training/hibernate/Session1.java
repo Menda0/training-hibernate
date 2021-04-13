@@ -1,16 +1,20 @@
 package com.training.hibernate;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.training.hibernate.domain.Title;
+
 /**
  * Hello world!
  *
  */
-public class App 
+public class Session1 
 {
 	
 	// This variable will store the current session
@@ -38,9 +42,22 @@ public class App
     	buildSessionFactory();
     	
     	session = sessionFactory.openSession();
+    	session.beginTransaction();
+    	
+    	String title = "Harry Potter";
+    	String type = "Fantasy";
+    	String country = "England";
+    	Date dateAdded = new Date();
+    	Integer releaseYear = 2008;
+    	String rating = "5 Stars";
+    	String duration = "158 min";
+    	
+    	Title movie = new Title(title, type, country, dateAdded, releaseYear, rating, duration);	
+    	session.saveOrUpdate(movie);
     	
         System.out.println( "Hello World!" );
         
+        session.getTransaction().commit();
         session.close();
     }
 }
