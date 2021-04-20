@@ -15,8 +15,8 @@ public interface IRepository<T> {
 	Collection<T> getAll(Session session);
 	
 	// Add or update entity on database
-	T saveOrUpdate(Session session, T t);
+	Integer saveOrUpdate(Session session, T t);
 	
 	// Remove entity from database
-	void delete(Session session, Integer id);
+	void delete(Session session, T id);
 }

@@ -1,8 +1,9 @@
 package com.training.hibernate.repository;
 
 import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import com.training.hibernate.domain.Title;
@@ -17,20 +18,19 @@ public class RepositoryTitle implements IRepository<Title>{
 
 	@Override
 	public Collection<Title> getAll(Session session) {
-		// TODO Auto-generated method stub
-		return null;
+		Criteria c = session.createCriteria(Title.class);
+		List<Title> titles = c.list();
+		return titles;
 	}
 
 	@Override
-	public Title saveOrUpdate(Session session, Title t) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer saveOrUpdate(Session session, Title t) {
+		return (Integer) session.save(t);
 	}
 
 	@Override
-	public void delete(Session session, Integer id) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Session session, Title t) {
+		session.delete(t);
 	}
 
 }

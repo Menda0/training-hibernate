@@ -1,5 +1,6 @@
 package com.training.hibernate;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.hibernate.Session;
@@ -64,10 +65,13 @@ public class TitleRepositoryTest {
     	String duration = "158 min";
     	
     	Title movie = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    
+    	Integer id = this.titleRepository.saveOrUpdate(session, movie);
     	
-    	Assert.assertNull(movie.getId());
     	session.saveOrUpdate(movie);
     	session.getTransaction().commit();
+    	
+    	Assert.assertNotNull(id);
     	
     	Title movieFromDatabase = this.titleRepository.get(session, movie.getId());
     	Assert.assertNotNull(movieFromDatabase);
@@ -76,5 +80,60 @@ public class TitleRepositoryTest {
     	session.close();
     	
     	Assert.assertNotNull(movie.getId());
+	}
+	
+	@Test
+	public void testGetAllTitles() {
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String title = "Harry Potter";
+    	String type = "Fantasy";
+    	String country = "England";
+    	Date dateAdded = new Date();
+    	Integer releaseYear = 2008;
+    	String rating = "5 Stars";
+    	String duration = "158 min";
+    	
+    	Title movie1 = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    	Title movie2 = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    	
+    	this.titleRepository.saveOrUpdate(session, movie1);
+    	this.titleRepository.saveOrUpdate(session, movie2);
+    	
+    	Collection<Title> titles = this.titleRepository.getAll(session);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		Assert.assertEquals(titles.size(), 2);
+		
+	}
+	
+	@Test
+	public void testDelete() {
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String title = "Harry Potter";
+    	String type = "Fantasy";
+    	String country = "England";
+    	Date dateAdded = new Date();
+    	Integer releaseYear = 2008;
+    	String rating = "5 Stars";
+    	String duration = "158 min";
+    	
+    	Title movie = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    	Integer id = this.titleRepository.saveOrUpdate(session, movie);
+    	
+    	Assert.assertNotNull(id);
+    	
+    	this.titleRepository.delete(session, movie);
+    	Title movieInDb = this.titleRepository.get(session, id);
+    	
+    	Assert.assertNull(movieInDb);
+		
+		session.getTransaction().commit();
+		session.close();
 	}
 }
