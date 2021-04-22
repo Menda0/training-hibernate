@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.training.hibernate.domain.Country;
 import com.training.hibernate.domain.Title;
 import com.training.hibernate.repository.IRepository;
 import com.training.hibernate.repository.RepositoryTitle;
@@ -58,13 +59,13 @@ public class TitleRepositoryTest {
     	
     	String title = "Harry Potter";
     	String type = "Fantasy";
-    	String country = "England";
+    	// String country = "England";
     	Date dateAdded = new Date();
     	Integer releaseYear = 2008;
     	String rating = "5 Stars";
     	String duration = "158 min";
     	
-    	Title movie = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    	Title movie = new Title(title, type, dateAdded, releaseYear, rating, duration);
     
     	Integer id = this.titleRepository.saveOrUpdate(session, movie);
     	
@@ -89,14 +90,14 @@ public class TitleRepositoryTest {
 		
 		String title = "Harry Potter";
     	String type = "Fantasy";
-    	String country = "England";
+    	//String country = "England";
     	Date dateAdded = new Date();
     	Integer releaseYear = 2008;
     	String rating = "5 Stars";
     	String duration = "158 min";
     	
-    	Title movie1 = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
-    	Title movie2 = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    	Title movie1 = new Title(title, type, dateAdded, releaseYear, rating, duration);
+    	Title movie2 = new Title(title, type, dateAdded, releaseYear, rating, duration);
     	
     	this.titleRepository.saveOrUpdate(session, movie1);
     	this.titleRepository.saveOrUpdate(session, movie2);
@@ -117,13 +118,13 @@ public class TitleRepositoryTest {
 		
 		String title = "Harry Potter";
     	String type = "Fantasy";
-    	String country = "England";
+    	//String country = "England";
     	Date dateAdded = new Date();
     	Integer releaseYear = 2008;
     	String rating = "5 Stars";
     	String duration = "158 min";
     	
-    	Title movie = new Title(title, type, country, dateAdded, releaseYear, rating, duration);
+    	Title movie = new Title(title, type, dateAdded, releaseYear, rating, duration);
     	Integer id = this.titleRepository.saveOrUpdate(session, movie);
     	
     	Assert.assertNotNull(id);

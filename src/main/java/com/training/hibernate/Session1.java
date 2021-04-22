@@ -46,13 +46,13 @@ public class Session1
     	
     	String title = "Harry Potter";
     	String type = "Fantasy";
-    	String country = "England";
+    	// String country = "England";
     	Date dateAdded = new Date();
     	Integer releaseYear = 2008;
     	String rating = "5 Stars";
     	String duration = "158 min";
     	
-    	Title movie = new Title(title, type, country, dateAdded, releaseYear, rating, duration);	
+    	Title movie = new Title(title, type, dateAdded, releaseYear, rating, duration);	
     	session.saveOrUpdate(movie);
     	
         System.out.println( "Hello World!" );

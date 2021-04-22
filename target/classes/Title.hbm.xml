@@ -10,7 +10,7 @@
 		</meta>
 	
 		<!-- Id integer auto generated -->
-		<id name="id" type="int" column="id">
+		<id name="id" type="int" column="title_id">
 			<generator class="native" />
 		</id>
 	
@@ -19,11 +19,11 @@
 		<!-- Hibernate will make a connection between Java datatypes and Database column types -->
 		<property name="type" column="type" type="string" />
 		<property name="title" column="title" type="string" />
-		<property name="country" column="country" type="string" />
 		<property name="dateAdded" column="date_added" type="date" />
 		<property name="releaseYear" column="release_year" type="int" />
 		<property name="rating" column="rating" type="string" />
 		<property name="duration" column="duration" type="string" />
 
+		<many-to-one name="country" class="com.training.hibernate.domain.Country" column="country_id" cascade="all" lazy="false"/>
 	</class>
 </hibernate-mapping>

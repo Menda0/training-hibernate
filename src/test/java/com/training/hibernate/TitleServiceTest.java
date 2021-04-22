@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.training.hibernate.domain.Country;
 import com.training.hibernate.domain.Title;
 import com.training.hibernate.services.TitleService;
 
@@ -52,6 +53,11 @@ public class TitleServiceTest {
     	String duration = "158 min";
 		Title title = this.titleService.addTitle(name, type, country, dateAdded, releaseYear, rating, duration);
 		
+		Country c = title.getCountry();
+    	
+    	Assert.assertNotNull(c);
+    	Assert.assertNotNull(c.getId());
+		
 		Assert.assertNotNull(title.getId());
 		Assert.assertEquals(name, title.getTitle());
 		Assert.assertEquals(type, title.getType());
@@ -73,7 +79,7 @@ public class TitleServiceTest {
 		
 		Assert.assertNotNull(titleUpdate);
 		Assert.assertEquals(newName, titleUpdate.getTitle());
-		Assert.assertEquals(title.getCountry(), titleUpdate.getCountry());
+		Assert.assertEquals(title.getCountry().getId(), titleUpdate.getCountry().getId());
 	}
 	
 }

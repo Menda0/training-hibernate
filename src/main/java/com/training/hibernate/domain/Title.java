@@ -7,20 +7,21 @@ public class Title {
 	private Integer id;
 	private String title;
 	private String type;
-	private String country;
 	private Date dateAdded;
 	private Integer releaseYear;
 	private String rating;
 	private String duration;
 	
+	// Add the entitie pojo you want to relate
+	private Country country;
+	
 	public Title() {}
 
-	public Title(String title, String type, String country, Date dateAdded, Integer releaseYear,
+	public Title(String title, String type, Date dateAdded, Integer releaseYear,
 			String rating, String duration) {
 		super();
 		this.title = title;
 		this.type = type;
-		this.country = country;
 		this.dateAdded = dateAdded;
 		this.releaseYear = releaseYear;
 		this.rating = rating;
@@ -49,14 +50,6 @@ public class Title {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	public Integer getReleaseYear() {
@@ -90,5 +83,14 @@ public class Title {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+	
 	
 }

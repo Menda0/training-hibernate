@@ -20,5 +20,6 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
 
         <mapping resource="Title.hbm.xml"/>
+        <mapping resource="Country.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
