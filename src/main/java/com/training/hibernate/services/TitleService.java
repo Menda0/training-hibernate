@@ -1,9 +1,13 @@
 package com.training.hibernate.services;
 
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import com.training.hibernate.domain.Country;
 import com.training.hibernate.domain.Title;
@@ -88,4 +92,85 @@ public class TitleService {
 		// TODO
 		return false;
 	}
+	
+	// Exercise 1 
+	// Select * from TITLE
+	public List<Title> getAllHql(){
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String hql = "FROM Title";
+		Query query = session.createQuery(hql);
+		
+		List<Title> result = (List<Title>)query.list();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return result;
+	}
+	
+	public List<Title> getAllCriteria(){
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Criteria cr = session.createCriteria(Title.class);
+		List<Title> result = cr.list();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return result;
+	}
+	
+	// Exercise 2
+	// Select * from TITLE where t.title = :name
+	public Title getTitleByNameHQL(String name) {
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String hql = "FROM Title t where t.title = :name";
+		Query query = session.createQuery(hql);
+		query.setParameter("name", name);
+		Title results = (Title)query.uniqueResult();
+		
+		
+		session.getTransaction().commit();
+		session.close();
+		return results;
+	}
+	
+	// Exercise 3
+	// Select * from TITLE where t inner join COUNTRY c on c.country_id = t.country_id where c.name = :name
+	public List<Title> getTitlesByCountry(String name){
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		String hql = "FROM Title as T WHERE T.country.name = :name";
+		Query query = session.createQuery(hql);
+		query.setParameter("name", name);
+		
+		List<Title> results = query.list();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return results;
+	}
+	
+	public List<Title> getTitlesByCountryCriteria(String name){
+		Session session = this.sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Criteria cr = session.createCriteria(Title.class);
+		cr.createCriteria("country", "country");
+		cr.add(Restrictions.eq("country.name", name));
+		List<Title> results = cr.list();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return results;
+	} 
+	
 }

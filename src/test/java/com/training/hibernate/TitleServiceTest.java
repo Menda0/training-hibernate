@@ -1,6 +1,7 @@
 package com.training.hibernate;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -81,5 +82,48 @@ public class TitleServiceTest {
 		Assert.assertEquals(newName, titleUpdate.getTitle());
 		Assert.assertEquals(title.getCountry().getId(), titleUpdate.getCountry().getId());
 	}
+	
+	@Test
+	public void testGetTitles() {
+		List<Title> titles1 = this.titleService.getAllHql();
+		List<Title> titles2 = this.titleService.getAllCriteria();
+		
+		Assert.assertTrue(titles1.size() > 0);
+		Assert.assertTrue(titles2.size() > 0);
+	}
+	
+	@Test
+	public void testGetTitleByName() {
+		
+		String name = "American History X";
+    	String type = "Fantasy";
+    	String country = "England";
+    	Date dateAdded = new Date();
+    	Integer releaseYear = 2008;
+    	String rating = "5 Stars";
+    	String duration = "158 min";
+		Title title = this.titleService.addTitle(name, type, country, dateAdded, releaseYear, rating, duration);
+		
+		
+		Title t = this.titleService.getTitleByNameHQL("American History X");
+		
+		Assert.assertNotNull(t.getId());
+		Assert.assertEquals("American History X", t.getTitle());
+		
+	}
+	
+	@Test
+	public void testGetTitleByCountry() {
+	
+		List<Title> titles = this.titleService.getTitlesByCountry("Japan");
+		List<Title> titlesByCriteria = this.titleService.getTitlesByCountryCriteria("Japan");
+		
+		Assert.assertTrue(titles.size() > 0);
+		Assert.assertEquals(titles.get(0).getCountry().getName(), "Japan");
+		Assert.assertTrue(titlesByCriteria.size() > 0);
+		Assert.assertEquals(titlesByCriteria.get(0).getCountry().getName(), "Japan");
+		
+	}
+
 	
 }
